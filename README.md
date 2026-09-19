@@ -36,6 +36,10 @@ docker compose up -d
 See `docs/learning/02-environments-and-git.md` for why both environments are
 useful.
 
+Docker is optional. When using the Homebrew PostgreSQL service instead, start
+it with `brew services start postgresql@18`, create the database once with
+`createdb retail_bi`, then run `python scripts/load_postgres.py`.
+
 ## Dataset
 
 The input is the UCI Online Retail dataset. It contains transaction line items

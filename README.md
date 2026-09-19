@@ -40,6 +40,18 @@ Docker is optional. When using the Homebrew PostgreSQL service instead, start
 it with `brew services start postgresql@18`, create the database once with
 `createdb retail_bi`, then run `python scripts/load_postgres.py`.
 
+## First LLM SQL tool
+
+With a local Ollama server running, ask a question with the guarded prototype:
+
+```bash
+source .venv/bin/activate
+python -m bi_agent.cli --show-sql "What were the top five countries by revenue?"
+```
+
+This version accepts only read-only SQL and runs it in a time-limited
+transaction. See `docs/learning/05-llm-sql-tool.md` before extending it.
+
 ## Dataset
 
 The input is the UCI Online Retail dataset. It contains transaction line items

@@ -43,6 +43,12 @@ Start with descriptive questions:
 
 The later agent will be constrained to follow this same discipline.
 
+## Do not invent a currency
+
+The dataset identifies a UK retailer but does not include a currency-code field.
+We therefore label amounts as **currency units**. Inferring GBP may be plausible,
+but it is still an inference the data cannot prove.
+
 ## References
 
 - [PostgreSQL aggregate functions](https://www.postgresql.org/docs/current/functions-aggregate.html)

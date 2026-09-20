@@ -58,6 +58,28 @@ The input is the UCI Online Retail dataset. It contains transaction line items
 from 2010-12-01 through 2011-12-09. See the source documentation in the
 learning note before changing any cleaning rule.
 
+## Implemented
+
+- Real UCI Online Retail dataset
+- Data cleaning and curation pipeline
+- PostgreSQL analytics database
+- Business-defined analytical schema
+- Read-only SQL execution layer
+- SQL safety validation
+- Local LLM inference with Ollama
+- Native LLM tool calling
+- LangGraph agent orchestration
+- PostgreSQL database tool
+- Agent → tool → database → agent execution loop
+- Business-semantic grounding for revenue, orders, AOV, country and time analysis
+
+### Current Agent
+
+The agent currently has one tool:
+
+```text
+query_database
+
 ## Project principles
 
 - Keep raw data immutable.

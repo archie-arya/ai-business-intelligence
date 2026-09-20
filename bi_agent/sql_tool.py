@@ -74,3 +74,29 @@ def execute_read_only_query(query: str, database: str | None = None) -> QueryRes
         rows=[dict(zip(columns, map(_json_value, row), strict=True)) for row in raw_rows[:MAX_ROWS]],
         truncated=len(raw_rows) > MAX_ROWS,
     )
+
+
+import json
+
+from langchain_core.tools import tool
+
+
+@tool
+def query_database(sql: str) -> str:
+    """Execute one read-only PostgreSQL query against the retail BI database.
+
+    Use this tool to answer business questions about sales, revenue, orders,
+    customers, products, countries, and time periods.
+
+    The SQL must be a single SELECT or WITH ... SELECT statement.
+    """
+    result = execute_read_only_query(sql)
+
+    return json.dumps(
+        {
+            "columns": result.columns,
+            "rows": result.rows,
+            "truncated": result.truncated,
+        },
+        default=str,
+    )

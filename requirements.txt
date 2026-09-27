@@ -6,3 +6,6 @@ psycopg[binary]>=3.2,<4
 langgraph>=1.2,<2
 langchain-core>=1.6,<2
 langchain-ollama>=1.0,<2
+langchain-text-splitters>=0.3,<2
+langchain-ollama>=0.3,<2
+pgvector>=0.3,<1

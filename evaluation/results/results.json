@@ -1,0 +1,636 @@
+[
+  {
+    "id": "rag_001",
+    "question": "What is a stockout?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [
+      "inventory_policy.md",
+      "customer_segmentation.md",
+      "data_dictionary_business.md",
+      "revenue_policy.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.25,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "A **stockout** occurs when the available inventory for a product reaches zero or becomes unavailable for sale, according to the inventory policy documentation. This situation can disrupt sales and requires replenishment actions to restore stock levels.",
+    "latency_ms": 43061.42,
+    "tools_called_detail": [
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "stockout"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rag_002",
+    "question": "What is the reorder point?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "The concept of \"reorder point\" is not defined in the provided business documents or the retail database schema. The available data focuses on sales transactions, products, customers, and geographic metrics, but does not include inventory management parameters like reorder points, lead times, or safety stock thresholds.\n\nTo determine a reorder point, you would typically need:\n1. Lead time demand (average demand during supplier lead time)\n2. Safety stock levels\n3. Service level targets\n\nThis calculation is outside the scope of the provided retail analytics database. Would you like me to help with any analysis related to sales patterns, product performance, or customer behavior that might inform inventory decisions?",
+    "latency_ms": 22006.93,
+    "tools_called_detail": []
+  },
+  {
+    "id": "rag_003",
+    "question": "What is safety stock?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "The available tools do not provide a definition for \"safety stock,\" as this concept is not explicitly covered in the retail analytics database schema, business definitions, or associated documentation. Safety stock generally refers to inventory held by a company to mitigate the risk of stockouts caused by uncertainties in demand or supply chain disruptions. This is a broader inventory management concept outside the scope of the provided dataset and tools.",
+    "latency_ms": 46231.69,
+    "tools_called_detail": []
+  },
+  {
+    "id": "rag_004",
+    "question": "How is inventory turnover defined?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [
+      "inventory_policy.md",
+      "data_dictionary_business.md",
+      "returns_and_promotions.md",
+      "customer_segmentation.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.25,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "Inventory turnover is defined as **a measure of how efficiently inventory is converted into sales over a defined period**. According to the business documentation, the metric requires specifying the formula and inventory valuation convention when presenting it. The exact calculation method should be referenced from operational data or configuration policies, as the definition focuses on the efficiency of inventory sales conversion rather than providing a fixed formula. \n\nFor analytical purposes, this metric is typically calculated using PostgreSQL's numerical data, as noted in the BI Guidance.",
+    "latency_ms": 52108.59,
+    "tools_called_detail": [
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "inventory turnover definition"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rag_005",
+    "question": "How is net revenue defined?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [
+      "revenue_policy.md",
+      "data_dictionary_business.md",
+      "returns_and_promotions.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.333,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "Net revenue is defined as **recognized sales after applicable discounts and returns**, according to the [revenue recognition policy](#revenue-policy.md). This means:\n\n1. **Gross revenue** (merchandise sales before discounts/returns) is adjusted by:\n   - Subtracting discounts (promotional reductions)\n   - Subtracting returns (merchandise given back after purchase)\n\n2. **Returns** reduce net revenue in the period when the return is recognized, per the policy.\n\n3. **Database calculation**: The `line_revenue` field (quantity \u00d7 unit price) is used as the base for revenue calculations. Net revenue would involve adjusting this value for discounts and returns, though the provided dataset does not explicitly track these adjustments.\n\nMonetary values are described in **currency units** (no currency symbol assumed). For analytical purposes, the dataset's `fact_sales_line` table is used for numerical calculations, while this definition comes from business policy documents.",
+    "latency_ms": 70397.73,
+    "tools_called_detail": [
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "net revenue definition"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rag_006",
+    "question": "What is gross revenue?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database"
+    ],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 1,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "The gross revenue for the period is **10,642,110.8 currency units**. This represents the total sum of all line revenues from valid, non-cancelled sales transactions in the dataset.",
+    "latency_ms": 36244.01,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT SUM(line_revenue) AS gross_revenue FROM retail.fact_sales_line;"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rag_007",
+    "question": "How should returns be treated when analysing revenue?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "Returns should be excluded from revenue analysis. According to the business definitions, revenue is defined as gross sales (SUM(line_revenue)) and cancellations/returns are explicitly omitted. The dataset's line_revenue field already represents gross sales value, so any returns/ cancellations are not included in the revenue calculations.",
+    "latency_ms": 20317.63,
+    "tools_called_detail": []
+  },
+  {
+    "id": "rag_008",
+    "question": "What should be considered when making replenishment recommendations?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "When making replenishment recommendations, consider the following factors and data points:\n\n1. **Product Demand Trends**  \n   - Analyze historical sales volume and revenue for individual products (using `dim_product.product_name`) to identify high-demand items.  \n   - Track seasonal patterns (e.g., holidays, monthly trends) via `fact_sales_line.invoice_date` and `fact_sales_line.year`, `month`.\n\n2. **Country-Specific Sales Performance**  \n   - Use `fact_sales_line.country` to prioritize replenishment in regions with higher revenue or order volume.  \n   - Avoid relying on `dim_customer.country` due to potential nulls in `customer_id`.\n\n3. **Inventory Turnover and Stock Levels**  \n   - Monitor products with low sales velocity (e.g., stagnant or declining revenue) to avoid overstocking.  \n   - Identify products with high revenue but low order counts (potential premium or niche items).\n\n4. **Order Frequency and Average Order Value**  \n   - Use `fact_sales_line.line_revenue` and `fact_sales_line.order_date` to assess average order value and customer purchasing behavior.  \n   - Prioritize replenishment for products driving higher average order values.\n\n5. **Data Completeness**  \n   - Note that December 2011 data is incomplete, so avoid over-reliance on end-of-year trends.\n\nTo derive actionable insights, query the database for metrics like total revenue per product, country-wise sales, and seasonal trends. For example:  \n```sql\nSELECT \n  dim_product.product_name, \n  SUM(fact_sales_line.line_revenue) AS total_revenue, \n  COUNT(DISTINCT fact_sales_line.invoice_no) AS order_count, \n  AVG(fact_sales_line.unit_price) AS avg_price\nFROM fact_sales_line\nJOIN dim_product ON fact_sales_line.stock_code = dim_product.stock_code\nGROUP BY dim_product.product_name\nORDER BY total_revenue DESC;\n``` \n\nThis would highlight top-performing products and guide replenishment priorities.",
+    "latency_ms": 65657.21,
+    "tools_called_detail": []
+  },
+  {
+    "id": "multi_001",
+    "question": "What was Q4 revenue and how is revenue defined?",
+    "error": "ValueError('PostgreSQL rejected the generated read-only query: relation \"fact_sales_line\" does not exist\\nLINE 1: SELECT SUM(line_revenue) AS q4_revenue FROM fact_sales_line ...\\n                                                    ^')",
+    "latency_ms": 38944.56541600084
+  },
+  {
+    "id": "multi_002",
+    "question": "What was revenue by quarter, and what does the business mean by revenue?",
+    "expected_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [
+      "revenue_policy.md",
+      "data_dictionary_business.md",
+      "returns_and_promotions.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.333,
+    "multi_source_success": true,
+    "answer_match": true,
+    "answer": "The revenue by quarter from the dataset is as follows:\n\n**Revenue by Quarter:**\n- 2010 Q4: 821,452.73 currency units\n- 2011 Q1: 1,928,572.43 currency units\n- 2011 Q2: 2,066,812.11 currency units\n- 2011 Q3: 2,532,352.69 currency units\n- 2011 Q4: 3,292,920.84 currency units\n\n**Business Definition of Revenue:**\nPer the revenue policy and data dictionary:\n1. **Revenue** represents net recognized revenue from completed customer transactions.\n2. It is calculated as **sales after discounts and returns** (net revenue).\n3. **Gross revenue** (before deductions) exists but is not the default metric.\n4. Returns reduce net revenue in the period they are recognized.\n5. The dataset uses line_revenue (quantity \u00d7 unit price) as the base metric, which aligns with the standard BI definition of net revenue.\n\nNote: December 2011 data is incomplete per the dataset's documentation.",
+    "latency_ms": 98282.04,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT year, quarter, SUM(line_revenue) AS revenue_by_quarter FROM retail.fact_sales_line GROUP BY year, quarter ORDER BY year, quarter;"
+        }
+      },
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "definition of revenue"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multi_003",
+    "question": "What were sales by quarter and how should returns affect revenue?",
+    "expected_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [
+      "revenue_policy.md",
+      "returns_and_promotions.md",
+      "data_dictionary_business.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.333,
+    "multi_source_success": true,
+    "answer_match": true,
+    "answer": "Sales by quarter (in currency units) were:\n- 2010 Q4: 821,452.73\n- 2011 Q1: 1,928,572.43\n- 2011 Q2: 2,066,812.11\n- 2011 Q3: 2,532,352.69\n- 2011 Q4: 3,292,920.84\n\nReturns affect revenue according to these policies:\n1. **Revenue Recognition**: Returns reduce net revenue in the period they're recognized (per revenue_policy.md). Gross revenue (before returns) vs net revenue (after returns) must be distinguished.\n2. **BI Guidance**: The dataset includes only gross sales (no returns/adjustments). Net revenue calculations would require additional data tracking returns.\n3. **Period Completeness**: The 2011 Q4 data is incomplete due to the dataset cutoff on December 9, 2011.\n\nFor accurate revenue analysis, always check period completeness and distinguish between gross sales (fact_sales_line.line_revenue) and net revenue (which requires return data not provided in this dataset).",
+    "latency_ms": 206860.14,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT year, quarter, SUM(line_revenue) AS revenue FROM retail.fact_sales_line GROUP BY year, quarter ORDER BY year, quarter;"
+        }
+      },
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "How are returns handled in revenue calculations?"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multi_004",
+    "question": "What was revenue by quarter and what is the difference between gross and net revenue?",
+    "expected_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [
+      "revenue_policy.md",
+      "data_dictionary_business.md",
+      "returns_and_promotions.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.333,
+    "multi_source_success": true,
+    "answer_match": true,
+    "answer": "The dataset provides **gross revenue** (revenue before discounts/returns) but does not include net revenue calculations. Here's the breakdown:\n\n### Revenue by Quarter (Gross)\n| Year | Quarter | Revenue (Currency Units) |\n|------|---------|--------------------------|\n| 2010 | 4       | 821,452.73              |\n| 2011 | 1       | 1,928,572.43            |\n| 2011 | 2       | 2,066,812.11            |\n| 2011 | 3       | 2,532,352.69            |\n| 2011 | 4       | 3,092,019.86            |\n\n### Gross vs. Net Revenue\n- **Gross revenue** is calculated as `quantity \u00d7 unit_price` (line_revenue) and represents total sales before discounts, returns, or other adjustments.\n- **Net revenue** would require subtracting discounts, returns, and other adjustments, but these fields are not present in the dataset. The source explicitly states that net revenue is \"recognized sales after applicable discounts and returns,\" which cannot be computed from the available tables.\n\n### Key Notes\n1. The dataset does not include net revenue metrics.\n2. The provided revenue figures are gross and represent the full value of sales as recorded in `fact_sales_line.line_revenue`.",
+    "latency_ms": 192413.66,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT year, quarter, SUM(line_revenue) AS revenue FROM retail.fact_sales_line WHERE invoice_date <= '2011-12-09' GROUP BY year, quarter ORDER BY year, quarter;"
+        }
+      },
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "net revenue definition"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multi_005",
+    "question": "What were the quarterly sales results and what does a sales line represent?",
+    "expected_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database"
+    ],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "data_dictionary_business.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": false,
+    "answer_match": true,
+    "answer": "The quarterly sales results from 2010 to 2011 are as follows (in currency units):\n\n| Year  | Quarter | Revenue       |\n|-------|---------|---------------|\n| 2010  | 4       | 821,452.73    |\n| 2011  | 1       | 1,928,572.43  |\n| 2011  | 2       | 2,066,812.11  |\n| 2011  | 3       | 2,532,352.69  |\n| 2011  | 4       | 3,292,920.84  |\n\n**Note:** The dataset covers 2010-12-01 to 2011-12-09, but December 2011 data is incomplete.\n\nA **sales line** represents a single product sold in an invoice. Each row in the `fact_sales_line` table corresponds to:\n- A specific product (via `stock_code`)\n- Quantity sold\n- Unit price\n- Revenue contribution (`quantity \u00d7 unit_price`)\n- It is part of an invoice (`invoice_no`), which may contain multiple sales lines for different products.\n\nThis granular data allows analysis of individual product performance within orders.",
+    "latency_ms": 282923.59,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT year, quarter, SUM(line_revenue) AS revenue FROM retail.fact_sales_line GROUP BY year, quarter ORDER BY year, quarter;"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multi_006",
+    "question": "What were the quarterly sales results and how should promotions be evaluated?",
+    "error": "ValueError('PostgreSQL rejected the generated read-only query: relation \"fact_sales_line\" does not exist\\nLINE 1: ... quarter, SUM(line_revenue) AS total_revenue FROM fact_sales...\\n                                                             ^')",
+    "latency_ms": 117086.70674999303
+  },
+  {
+    "id": "multi_007",
+    "question": "What were the quarterly sales results and what does an order represent?",
+    "expected_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "data_dictionary_business.md"
+    ],
+    "actual_sources": [
+      "data_dictionary_business.md",
+      "inventory_policy.md",
+      "customer_segmentation.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.333,
+    "multi_source_success": true,
+    "answer_match": true,
+    "answer": "The quarterly sales results from 2010 to 2011 are as follows (in currency units):\n\n**2010:**\n- Q4: $821,452.73 revenue from 1,629 orders (avg. $504.27/order)\n\n**2011:**\n- Q1: $1,928,572.43 revenue from 3,777 orders (avg. $510.61/order)\n- Q2: $2,066,812.11 revenue from 4,625 orders (avg. $446.88/order)\n- Q3: $2,532,352.69 revenue from 4,843 orders (avg. $522.89/order)\n- Q4: $3,292,920.84 revenue from 5,852 orders (avg. $562.70/order)\n\n*Note: December 2011 data is incomplete.*\n\nAn **order** represents a customer transaction containing one or more line items (product sales). Each line item is a record of a specific product sold, with quantity and price details. The \"order\" metric counts distinct invoice numbers to avoid double-counting transactions.",
+    "latency_ms": 137726.73,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT year, quarter, SUM(line_revenue) AS revenue, COUNT(DISTINCT invoice_no) AS order_count, ROUND(SUM(line_revenue) / COUNT(DISTINCT invoice_no), 2) AS average_order_value FROM retail.fact_sales_line GROUP BY year, quarter ORDER BY year, quarter;"
+        }
+      },
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "definition of order"
+        }
+      }
+    ]
+  },
+  {
+    "id": "multi_008",
+    "question": "What was quarterly revenue and what policy should be used to interpret it?",
+    "expected_tools": [
+      "query_database",
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "query_database"
+    ],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": false,
+    "answer_match": true,
+    "answer": "The quarterly revenue from the dataset is as follows:\n\n**Quarterly Revenue (currency units):**\n- 2010 Q4: 821,452.73\n- 2011 Q1: 1,928,572.43\n- 2011 Q2: 2,066,812.11\n- 2011 Q3: 2,532,352.69\n- 2011 Q4: 3,292,920.84\n\n**Interpretation Policy:**\n1. **Revenue Definition:** Represents gross sales (line_revenue) from valid non-cancelled transactions. Returns/cancellations are excluded.\n2. **Data Completeness:** The dataset covers 2010-12-01 to 2011-12-09, but December 2011 data is incomplete.\n3. **Currency:** All values are in \"currency units\" (no specific currency symbol or code provided).\n4. **Grouping:** Quarterly analysis must always include both `year` and `quarter` for accurate aggregation.",
+    "latency_ms": 134743.99,
+    "tools_called_detail": [
+      {
+        "name": "query_database",
+        "args": {
+          "sql": "SELECT year, quarter, SUM(line_revenue) AS quarterly_revenue FROM retail.fact_sales_line GROUP BY year, quarter ORDER BY year, quarter;"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sem_001",
+    "question": "When should replenishment normally begin?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "The question about when replenishment should normally begin is a business process or operational policy question. However, the provided tools and database schema do not include information about inventory management, replenishment triggers, or operational timelines. The available data focuses on sales, products, and customer metrics, not on supply chain or inventory replenishment practices.\n\nWithout access to business documents or inventory-related data, this question cannot be answered using the provided tools. The answer would depend on external business policies or operational guidelines not included in the retail database.",
+    "latency_ms": 66659.2,
+    "tools_called_detail": []
+  },
+  {
+    "id": "sem_002",
+    "question": "What inventory buffer protects us from forecast error?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [
+      "inventory_policy.md",
+      "data_dictionary_business.md",
+      "customer_segmentation.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.333,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "The inventory buffer that protects against forecast error is called **Safety Stock**. \n\nAs defined in the inventory policy documentation:\n> *\"Safety Stock: Inventory held to protect against demand variability, supply delays, and forecast error.\"*\n\nThis buffer ensures availability during periods of higher-than-expected demand or supply chain disruptions.",
+    "latency_ms": 81695.23,
+    "tools_called_detail": [
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "inventory buffer forecast error"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sem_003",
+    "question": "What happens to recognized sales when merchandise is returned?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [
+      "search_business_documents"
+    ],
+    "tool_selection_exact": true,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "revenue_policy.md"
+    ],
+    "actual_sources": [
+      "revenue_policy.md",
+      "returns_and_promotions.md",
+      "data_dictionary_business.md",
+      "inventory_policy.md"
+    ],
+    "source_recall": 1.0,
+    "source_precision": 0.25,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "When merchandise is returned, recognized sales (net revenue) is reduced in the period the return is recognized. According to the revenue recognition policy:\n\n1. **Returns reduce net revenue** - The value of returned goods is subtracted from gross revenue to calculate net revenue. This reflects the principle that revenue should represent realized sales after accounting for returns.\n\n2. **Impact on recognized sales** - The return directly decreases the net revenue amount recognized in the financial statements. This adjustment ensures revenue reflects only sales that have been successfully completed and not reversed due to returns.\n\n3. **Accounting treatment** - The return is recorded as a reduction to revenue in the period when the return is authorized and the merchandise is reclaimed, following the revenue recognition guidelines.\n\nThis treatment ensures that revenue metrics accurately represent actual sales transactions after accounting for merchandise returns.",
+    "latency_ms": 111680.16,
+    "tools_called_detail": [
+      {
+        "name": "search_business_documents",
+        "args": {
+          "query": "policies on sales returns and recognized revenue"
+        }
+      }
+    ]
+  },
+  {
+    "id": "sem_004",
+    "question": "Can a promotion increase volume while reducing realized revenue per unit?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "returns_and_promotions.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "The question is a business concept rather than a data query, so it doesn't require database access. \n\n**Answer:**  \nYes, a promotion can increase sales volume while reducing realized revenue per unit. For example, a discount (e.g., 20% off) might encourage more customers to purchase, increasing the quantity sold (volume). However, the lower unit price reduces revenue per unit. The overall impact on total revenue depends on the elasticity of demand: if the volume increase outweighs the price reduction, total revenue may rise, but the realized revenue per unit (unit price) would still be lower than before. \n\nThis scenario is common in sales promotions, where the goal is to boost volume rather than maximize price per unit.",
+    "latency_ms": 168861.89,
+    "tools_called_detail": []
+  },
+  {
+    "id": "sem_005",
+    "question": "What database grain is generally appropriate for aggregating product sales?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "data_dictionary_business.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": false,
+    "answer": "The appropriate database grain for aggregating product sales is the **invoice line item** (i.e., each row in `fact_sales_line`). This level captures the most granular transactional data, including quantity, unit price, and revenue per product line. \n\nFor analysis, you can aggregate this grain by dimensions like:\n- **Product** (via `stock_code` and `dim_product.product_name`)\n- **Time** (via `invoice_date` or precomputed `year`, `quarter`, `month`)\n- **Country** (directly from `fact_sales_line.country`)\n\nThis structure allows flexible reporting while preserving detailed transactional accuracy.",
+    "latency_ms": 46900.73,
+    "tools_called_detail": []
+  },
+  {
+    "id": "sem_006",
+    "question": "What is a customer transaction that can contain multiple line items called?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "data_dictionary_business.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "The customer transaction that can contain multiple line items is called an **invoice**. In the retail schema, each invoice is identified by the `invoice_no` field, and multiple line items (product sales) are grouped under a single invoice. This aligns with the business definition of \"order count\" using `COUNT(DISTINCT invoice_no)`.",
+    "latency_ms": 19505.45,
+    "tools_called_detail": []
+  },
+  {
+    "id": "sem_007",
+    "question": "What measure tells us how efficiently inventory becomes sales?",
+    "expected_tools": [
+      "search_business_documents"
+    ],
+    "actual_tools": [],
+    "tool_selection_exact": false,
+    "unnecessary_tool_calls": 0,
+    "expected_sources": [
+      "inventory_policy.md"
+    ],
+    "actual_sources": [],
+    "source_recall": 0.0,
+    "source_precision": 0.0,
+    "multi_source_success": null,
+    "answer_match": true,
+    "answer": "The measure that indicates how efficiently inventory becomes sales is the **Inventory Turnover Ratio**. This metric calculates how many times a company's inventory is sold and replaced over a specific period. It is typically computed as:\n\n**Inventory Turnover = Cost of Goods Sold (COGS) / Average Inventory**\n\nHowever, based on the provided schema, the `retail` database does not include inventory levels or COGS data directly. The available data focuses on sales revenue, product details, and customer information. Without inventory data, the Inventory Turnover Ratio cannot be calculated using the current schema. \n\nIf you need to analyze sales efficiency relative to inventory, additional data (e.g., inventory quantities or values) would be required.",
+    "latency_ms": 75049.26,
+    "tools_called_detail": []
+  }
+]

@@ -9,6 +9,7 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from bi_agent.model import get_model
 from bi_agent.schema import SCHEMA_CONTEXT
 from bi_agent.sql_tool import query_database
+from bi_agent.rag_tool import search_business_documents
 
 
 SYSTEM_PROMPT = f"""You are a business intelligence agent for a retail analytics database.
@@ -38,7 +39,7 @@ Agent rules:
 def build_graph():
     model = get_model()
 
-    tools = [query_database]
+    tools = [query_database, search_business_documents]
     model_with_tools = model.bind_tools(tools)
 
     def agent_node(state: MessagesState):
